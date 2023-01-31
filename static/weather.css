@@ -1,0 +1,150 @@
+body{
+    display: block;
+    padding: 0;
+    margin: 0;
+    font-size: 2vh;
+    color: white;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+  width: 0;
+  border: none;
+  margin: 0;
+}
+
+#headline_container, #status_container{
+    position: fixed;
+    left: 0;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: block;
+    z-index: 5;
+    text-align: center;
+}
+#headline_container{
+    top: 0;
+    height: 4vh;
+}
+#status_container{
+    bottom: 0;
+}
+#status_container p{
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+#headline_container p{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 3vh;
+    margin: 0.5vh;
+}
+
+.transparent_back{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.5;
+    z-index: -1;
+}
+
+#video_container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+#weather_video{
+    min-width: 100vw;
+    min-height: 100vh;
+    width: auto;
+    height: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#weather_msg{
+    padding: 0;
+    display: inline-block;
+    width: 100%;
+    line-height: 1em;
+    margin-top: 0.5em !important;
+}
+
+#weather_msg img{
+    height: 3em;
+    float: right;
+    margin: -0.5em 1em -1.5em 0;
+}
+
+.forcast{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex
+    justify-content: space-between;
+}
+.daily_forcast{
+    padding: 0 0 20px 0;
+    margin: auto;
+    float: left;
+    width: calc(25% - 2px);
+    max-width: calc(25% - 2px);
+    overflow: hidden;
+}
+.daily_forcast:nth-child(1), .daily_forcast:nth-child(2), .daily_forcast:nth-child(3){
+    border-right: 1px solid black;
+}
+.daily_forcast p{
+    width: calc(100% - 4px);
+    padding: 2px;
+    line-height: 1em;
+    margin: 0;
+    height: 1em;
+}
+.small{
+    font-size: 0.7em;
+    margin-top: 0.1em;
+    display: inline-block;
+}
+.left-aligned{
+    float: left;
+}
+.right-aligned{
+    float: right;
+}
+.small_icon{
+    height: 1.1em;
+    width: auto;
+}
+.daily_forcast p img{
+    height: 1.6em;
+    float: right;
+    margin: -0.3em 1em -0.3em 0;
+}
+.bottom-border{
+    border-bottom: 1px solid black;
+}
+.forcast_date{
+    font-size: 0.8em;
+    font-weight: 800;
+    padding: 0  !important;
+    margin: 0  !important;
+    line-height: 0.8em !important;
+}
