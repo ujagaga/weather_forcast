@@ -1,5 +1,4 @@
-WEATHER_API_KEY = "your key here"
-WEATHER_API_KEY = "6b15e16bb3dc4ba1b063d0836d56ce44"
+WEATHER_API_KEY = "your weatherbit.io API key here"
 WEATHER_API_URL = "http://api.weatherbit.io/v2.0/current"
 WEATHER_ICON_URL = "https://www.weatherbit.io/static/img/icons"
 city_ids = {
