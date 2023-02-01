@@ -148,3 +148,20 @@ body{
     margin: 0  !important;
     line-height: 0.8em !important;
 }
+#display_temp{
+    position: fixed;
+    font-size: 25vh;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    color: white;
+    display: block;
+    padding: 0;
+    margin: 0;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 1);
+}
+.mini{
+    font-size: 0.3em;
+    line-height: 0.3em;
+}

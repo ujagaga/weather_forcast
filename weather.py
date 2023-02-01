@@ -11,10 +11,10 @@ import os
 
 
 db_path = "database.db"
-app = Flask(__name__, static_url_path='/static', static_folder='static')
+application = Flask(__name__, static_url_path='/static', static_folder='static')
 
-app.config['SECRET_KEY'] = '9OLWxND4o83j4K4iuopOqwerty'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+application.config['SECRET_KEY'] = '9OLWxND4o83j4K4iuopOqwerty'
+application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 
 
 def init_database():
@@ -189,7 +189,7 @@ def get_current_weather(city_name: str = config.DEFAULT_CITY, use_translation=co
     return {"status": status, "detail": detail}
 
 
-@app.before_request
+@application.before_request
 def before_request():
     if not os.path.isfile(db_path):
         init_database()
@@ -197,16 +197,17 @@ def before_request():
     g.db = sqlite3.connect(db_path)
 
 
-@app.teardown_request
+@application.teardown_request
 def teardown_request(exception):
     if hasattr(g, 'db'):
         g.db.close()
 
 
-@app.route('/', methods=['GET'])
+@application.route('/', methods=['GET'])
 def index(use_translation=config.USE_TRANSLATIONS):
 
     weather_msg = translate_error_message("Error acquiring weather data", use_translation=use_translation)
+    display_temp = ""
     temperature = ""
     icon = ""
     icon_location = config.WEATHER_ICON_URL
@@ -233,11 +234,9 @@ def index(use_translation=config.USE_TRANSLATIONS):
         try:
             data = weather["detail"]
             city = data["city"]
-            weather_msg = data["weather"]
             weather_msg = translate_weather_status(status_code=data['weather_code'], default_message=data['weather'], use_translation=use_translation)
-
-            temperature = f"Temp: {data['temp']}{chr(176)}C, " \
-                          f"{translate_custom_message('Feels like', use_translation=use_translation)}: " \
+            display_temp = data['temp']
+            temperature = f"{translate_custom_message('Feels like', use_translation=use_translation)}: " \
                           f"{data['temp_feel']}{chr(176)}C"
             icon = data["weather_icon"]
 
@@ -277,6 +276,7 @@ def index(use_translation=config.USE_TRANSLATIONS):
         'weather.html',
         city=city,
         weather_msg=weather_msg,
+        display_temp=display_temp,
         temperature=temperature,
         icon=icon,
         icon_location=icon_location,
@@ -285,6 +285,6 @@ def index(use_translation=config.USE_TRANSLATIONS):
     )
 
 
-@app.route('/en', methods=['GET'])
+@application.route('/en', methods=['GET'])
 def index_en():
     return index(use_translation=False)
