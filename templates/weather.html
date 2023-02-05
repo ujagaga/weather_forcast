@@ -24,7 +24,19 @@
     </div>
 
     <div id="video_container">
-        <video id="weather_video" autoplay muted loop>
+        <video id="video_1" class="weather_video"
+                muted
+                playsinline
+                autoplay
+                preload="auto"
+                onplay="setupVideoQueue('video_1', 'video_2')">
+            <source src="static/videos/{{forcast_data['today_info']['icon_name']}}.mp4" type="video/mp4">
+        </video>
+        <video id="video_2" class="weather_video"
+                muted
+                playsinline
+                preload="auto"
+                onplay="setupVideoQueue('video_2', 'video_1')">
             <source src="static/videos/{{forcast_data['today_info']['icon_name']}}.mp4" type="video/mp4">
         </video>
     </div>

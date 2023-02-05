@@ -73,7 +73,7 @@ body{
     z-index: 1;
 }
 
-#weather_video{
+.weather_video{
     min-width: 100vw;
     min-height: 100vh;
     width: auto;
@@ -82,6 +82,14 @@ body{
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    transition: opacity 2s;
+}
+.fading {
+    opacity: 0;
+}
+
+.showing {
+    opacity: 1;
 }
 
 .forcast_scroll{
@@ -138,7 +146,7 @@ body{
 #display_temp{
     position: fixed;
     font-size: 25vh;
-    top: 50vh;
+    top: 30vh;
     left: 50vw;
     transform: translate(-50%, -50%);
     z-index: 100;
