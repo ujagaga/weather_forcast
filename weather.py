@@ -216,14 +216,10 @@ def teardown_request(exception):
 @application.route('/<lang>', methods=['GET'])
 def index(lang=config.DEFAULT_LANG, city_name=config.DEFAULT_CITY):
     if lang not in config.LANGS:
-        print("404 lang:", lang)
         return "Not found", 404
     error_message = None
 
     city_name = request.args.get('city_name', city_name)
-
-    print("CITY:", city_name)
-    print("lang:", lang)
 
     db_current_weather_data = read_db_data(data_key=city_name)
 
@@ -232,10 +228,8 @@ def index(lang=config.DEFAULT_LANG, city_name=config.DEFAULT_CITY):
         if datetime.now().timestamp() - db_current_weather_data["timestamp"] < config.WEATHER_NOT_READABLE_SECONDS:
             weather = db_current_weather_data["value"]
             read_api_data_flag = False
-            print("***** READING DB *****")
 
     if read_api_data_flag:
-        print("***** READING API *****")
         weather = get_weather_forcast(city_name=city_name)
         if "OK" in weather['status']:
             city_name = weather["detail"]["city_name"]
@@ -250,8 +244,6 @@ def index(lang=config.DEFAULT_LANG, city_name=config.DEFAULT_CITY):
         print(f"ERROR reading weather forcast: {weather}")
         error_message = weather["detail"]["message"]
         forcast_data = None
-
-    print("DATA:", forcast_data)
 
     return render_template(
         'weather.html',
