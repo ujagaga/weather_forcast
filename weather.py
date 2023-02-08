@@ -10,6 +10,7 @@ import os
 import urllib.parse
 from datetime import datetime, timedelta
 
+sys.path.insert(0, os.path.dirname(__file__))
 
 db_path = "database.db"
 application = Flask(__name__, static_url_path='/static', static_folder='static')
@@ -198,6 +199,29 @@ def get_weather_forcast(city_name: str = config.DEFAULT_CITY) -> dict:
     return {"status": status, "detail": detail}
 
 
+def translate_weekdays(lang):
+    weekdays = {}
+    try:
+        for day_number in config.WEEK_DAYS.keys():
+            day_object = config.WEEK_DAYS.get(day_number, {})
+            day_name = day_object.get(lang, "")
+            weekdays[day_number] = day_name
+    except:
+        pass
+
+    return weekdays
+
+
+def translate_forcast_message(forcast, lang):
+    try:
+        description = forcast["today_info"]["description"][lang]
+        forcast["today_info"]["description"] = description
+    except:
+        pass
+
+    return forcast
+
+
 @application.before_request
 def before_request():
     if not os.path.isfile(db_path):
@@ -249,7 +273,6 @@ def index(lang=config.DEFAULT_LANG, city_name=config.DEFAULT_CITY):
         'weather.html',
         locations=config.LOCATIONS.keys(),
         error_message=error_message,
-        forcast_data=forcast_data,
-        lang=lang,
-        weekdays=config.WEEK_DAYS
+        forcast_data=translate_forcast_message(forcast_data, lang),
+        weekdays=translate_weekdays(lang)
     )

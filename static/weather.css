@@ -126,7 +126,7 @@ body{
 }
 .time_mark{
     float: left;
-    color: black;
+    color: orange;
     margin-right: 5px;
 }
 .small{
