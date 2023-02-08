@@ -1,13 +1,12 @@
 # Weather Forcast
 
-Weather forecast page with animated background for a single city.
-Before you start, please create an account on https://www.weatherbit.io and make note of your API key. 
-Then replace it in the config file. 
-The config file contains translations of weather status messages "WEATHER_CODES" in Serbian language. 
-If you wish to just use English as is default, set the "USE_WEATHER_CODES" variable to False. 
-This is also applied when using "/en" page. 
-You can also provide your own translations.
-Same goes for error messages.
+Weather forecast page with animated background for a small number of cities selectable at the top of the page.
+Using "https://open-meteo.com" as weather service, but taking care not to make too manu calls, 
+so the data is stored in local database and updated periodically.
+
+The config file contains translations of weather status messages "WEATHER_CODES" in Serbian, English and Russian language. 
+Default is Serbian, so to use English, just go to "en" page like "http://localhost:8000/en".
+You can also provide your own translations in the config file.
 
 
 To install dependencies:
@@ -19,6 +18,12 @@ To run:
     flask --app weather run --host 0.0.0.0 --reload
 
 # Animations
+The video material used is freely downloaded from https://pixabay.com and uploaded to a separate repository used as a submodule.
+To clone this repo, use:
 
-The video material used is freely downloaded from https://www.pexels.com/. 
-If you wish to use other, just replace files in static/videos/, but make sure to keep the same names.
+    git clone https://github.com/ujagaga/weather_forcast.git
+    cd weather_forcast
+    git submodule update --init
+    git submodule update --remote
+
+If you wish to use other videos, just replace files in static/videos/, but make sure to keep the same names.
