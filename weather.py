@@ -173,7 +173,7 @@ def get_weather_forcast(city_name: str = config.DEFAULT_CITY) -> dict:
                             icon_name = f"{description['icon']}n"
 
                         if item_time.replace(minute=0) <= now < (item_time.replace(minute=0) + timedelta(hours=1)):
-                            today_info["description"] = description
+                            today_info["weather_code"] = weather_code
                             today_info["icon_name"] = icon_name
                             today_info["temp"] = temperature
                             today_info_set_flag = True
@@ -213,9 +213,11 @@ def translate_weekdays(lang):
 
 
 def translate_forcast_message(forcast, lang):
+    forcast["today_info"]["description"] = ""
     try:
-        description = forcast["today_info"]["description"][lang]
-        forcast["today_info"]["description"] = description
+        weather_code = forcast["today_info"]["weather_code"]
+        description_data = config.WEATHER_CODES[weather_code]
+        forcast["today_info"]["description"] = description_data[lang]
     except:
         pass
 
