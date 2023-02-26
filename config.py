@@ -39,7 +39,7 @@ WEATHER_CODES = {
     71: {"en": "Slight snow", "sr": "Slab sneg", "ru": "Небольшой снег", "icon": "s01"},
     73: {"en": "Moderate snow", "sr": "Umeren sneg", "ru": "Умеренный снег", "icon": "s01"},
     75: {"en": "Heavy snow", "sr": "Gust sneg", "ru": "Сильный снег", "icon": "s01"},
-    77: {"en": "Snow grains", "sr": "Ledeni sneg", "ru": "Снежная крупа", "icon": "s01"},
+    77: {"en": "Snow", "sr": "Sneg", "ru": "Снег", "icon": "s01"},
     80: {"en": "Slight rain showers", "sr": "Laki pljuskovi", "ru": "Слабые ливневые дожди", "icon": "r01"},
     81: {"en": "Moderate rain showers", "sr": "Umereni pljuskovi", "ru": "Умеренные ливневые дожди", "icon": "r01"},
     82: {"en": "Violent rain showers", "sr": "Jaki pljuskovi", "ru": "Сильные ливневые дожди", "icon": "r02"},
