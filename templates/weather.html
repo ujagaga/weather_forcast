@@ -52,7 +52,8 @@
         <div class="forcast_scroll">
             {% for item in forcast_data.hourly %}
             <div class="forcast">
-                <p><sup class="time_mark">{{ item.hour }}:00</sup>{{ item.temp }}&#8451;</p>
+                <p class="time_mark">{{ item.start_hour }}:00 - {{ item.end_hour }}:00</p>
+                <p>{{ item.mid_temp }}&#8451;</p>
                 <p class="small">
                     <img src="/static/icons/{{ item.icon }}.png"/>
                 </p>

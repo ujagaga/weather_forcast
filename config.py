@@ -11,7 +11,7 @@ TODAY_MAX_HOURS = 25     # 24 hours max display plus current hour
 DEFAULT_PARMS = {
     "latitude": "45.26",
     "longitude": "19.82",
-    "hourly": "temperature_2m,weathercode,precipitation",
+    "hourly": "temperature_2m,weathercode",
     "timezone": "auto",
     "daily": 'weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset'
 }

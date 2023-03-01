@@ -11,11 +11,13 @@ You can also provide your own translations in the config file.
 
 To install dependencies:
 
-    pip install flask flask-sqlalchemy requests
+    pip3 install flask flask-sqlalchemy requests
 
 To run:
 
-    flask --app weather run --host 0.0.0.0 --reload
+    export FLASK_APP=weather.py
+    export FLASK_ENV=development
+    flask run
 
 # Animations
 The video material used is freely downloaded from https://pixabay.com and uploaded to a separate repository used as a submodule.
