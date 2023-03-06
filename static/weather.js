@@ -75,6 +75,8 @@ function display_multiple_hour_data(hourly_data, hours){
 
     for(let i = 0; i < hourly_data.length; i++){
         let obj = hourly_data[i];
+        precipitation = obj.prec;
+        weathercode = obj.wc;
 
         if(interval == 0){
             start_hour = obj.hour;
@@ -82,8 +84,6 @@ function display_multiple_hour_data(hourly_data, hours){
             start_temp = obj.temp;
             max_temp = obj.temp;
             min_temp = obj.temp;
-            precipitation = obj.prec;
-            weathercode = obj.wc;
         }else{
             if(max_temp < obj.temp){
                 max_temp = obj.temp;
@@ -92,7 +92,7 @@ function display_multiple_hour_data(hourly_data, hours){
                 min_temp = obj.temp;
             }
 
-            if((interval >= hours) || (obj.prec != precipitation)){
+            if((interval >= hours) || (obj.prec == 0 && precipitation != 0) || (obj.prec != 0 && precipitation == 0)){
                 end_hour = obj.hour;
                 end_temp = obj.temp;
 
@@ -158,6 +158,19 @@ function display_multiple_hour_data(hourly_data, hours){
     }
 }
 
+function distribute_forcasts(){
+
+    var forecast_divs = hourly_container.getElementsByTagName('div');
+    var num_of_children = forecast_divs.length - 1;
+    var total_width = window.innerWidth;
+    var min_width = Math.round(total_width/(num_of_children + 1)) - 5;
+    var produced_width = 0;
+
+    for(var i=0; i<num_of_children; i++) {
+        forecast_divs[i].style.minWidth = min_width + "px";
+    }
+}
+
 function populate_hourly_forcast(){
     var data = document.getElementById("hourly_data").value.replaceAll("'", '"');
     try{
@@ -170,6 +183,7 @@ function populate_hourly_forcast(){
                 hourly_container.innerHTML = "";
                 display_multiple_hour_data(hourly_data, i);
                 if(hourly_container.scrollWidth <= hourly_container.clientWidth){
+                    console.log("Overflow " + i);
                     break;
                 }else{
                     console.log("Overflow " + i);
@@ -184,6 +198,7 @@ function populate_hourly_forcast(){
 
 window.onload = function() {
     populate_hourly_forcast();
+    distribute_forcasts();
     // Refresh every half an hour
     setTimeout(reload, 1800000);
 }

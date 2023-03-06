@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather</title>
-    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-    <link rel="stylesheet" href="/static/weather.css"/>
+    <link rel="icon" type="image/x-icon" href="static/favicon.ico">
+    <link rel="stylesheet" href="static/weather.css"/>
 </head>
 <body>
     {% if forcast_data %}
@@ -30,14 +30,14 @@
                 autoplay
                 preload="auto"
                 onplay="setupVideoQueue('video_1', 'video_2')">
-            <source src="/static/videos/{{forcast_data['today_info']['icon_name']}}.mp4" type="video/mp4">
+            <source src="static/videos/{{forcast_data['today_info']['icon_name']}}.mp4" type="video/mp4">
         </video>
         <video id="video_2" class="weather_video"
                 muted
                 playsinline
                 preload="auto"
                 onplay="setupVideoQueue('video_2', 'video_1')">
-            <source src="/static/videos/{{forcast_data['today_info']['icon_name']}}.mp4" type="video/mp4">
+            <source src="static/videos/{{forcast_data['today_info']['icon_name']}}.mp4" type="video/mp4">
         </video>
     </div>
 
@@ -59,7 +59,7 @@
                 <p><sup>{{ weekdays[item.day] }}</sup></p>
                 <p class="daily_display">
                     <span class="lower">{{ item.temp_min }}&#8451;</span>
-                    <img src="/static/icons/{{ item.icon_name }}.png"/>
+                    <img src="static/icons/{{ item.icon_name }}.png"/>
                     <span class="higher">{{ item.temp_max }}&#8451;</span>
                 </p>
 
@@ -71,5 +71,5 @@
         <p>{{ error_message }}</p>
     {% endif %}
 </body>
-<script src="/static/weather.js"></script>
+<script src="static/weather.js"></script>
 </html>
