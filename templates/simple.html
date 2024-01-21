@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <link rel="icon" type="image/x-icon" href="static/favicon.ico">
+    <link rel="stylesheet" href="static/weather.css"/>
+</head>
+<body>
+    {% if forcast_data %}
+    <div id="headline_container">
+        <select id="city_name" onchange="reload()">
+            {% if locations %}
+                {% for city_name in locations %}
+                    {% if forcast_data.city_name == city_name %}
+                        <option value="{{ city_name }}" selected="selected">{{ city_name }}</option>
+                    {% else %}
+                        <option value="{{ city_name }}">{{ city_name }}</option>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </select>
+    </div>
+
+    <img id="main_image" src=""/>
+
+    <p id="display_temp">{{ forcast_data.today_info.temp }}<sup class="mini">&#8451;</sup></p>
+
+    <div id="status_container">
+        <div class="transparent_back"></div>
+
+        <p>
+            {{ forcast_data.today_info.description }}
+        </p>
+        <div id="hourly_container">
+            <input type="hidden" id="hourly_data" value="{{forcast_data.hourly}}">
+        </div>
+
+        <div class="forcast_scroll">
+            {% for item in forcast_data.daily %}
+            <div class="forcast">
+                <p><sup>{{ weekdays[item.day] }}</sup></p>
+                <p class="daily_display">
+                    <span class="lower">{{ item.temp_min }}&#8451;</span>
+                    <img src="static/icons/{{ item.icon_name }}.png"/>
+                    <span class="higher">{{ item.temp_max }}&#8451;</span>
+                </p>
+
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+        <p>{{ error_message }}</p>
+    {% endif %}
+</body>
+<script src="static/simple.js"></script>
+</html>

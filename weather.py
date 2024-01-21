@@ -246,6 +246,12 @@ def index(lang=config.DEFAULT_LANG, city_name=config.DEFAULT_CITY):
 
     city_name = request.args.get('city_name', city_name)
 
+    animate = request.args.get("animate", "yes")
+    if animate == "yes":
+        template_name = 'weather.html'
+    else:
+        template_name = 'simple.html'
+
     db_current_weather_data = read_db_data(data_key=city_name)
 
     read_api_data_flag = True
@@ -271,7 +277,7 @@ def index(lang=config.DEFAULT_LANG, city_name=config.DEFAULT_CITY):
         forcast_data = None
 
     return render_template(
-        'weather.html',
+        template_name,
         locations=config.LOCATIONS.keys(),
         error_message=error_message,
         forcast_data=translate_forcast_message(forcast_data, lang),
